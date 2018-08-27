@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col" style="min-height: 300px;">
+    <div id="container" class="widget-container drag-boundary" 
+         [ngClass]="{ 'top-b': !edge?.top, 'bottom-b': !edge?.bottom, 'left-b': !edge?.left, 'right-b': !edge?.right }" #myBounds>
+      <div #ngDraggable
+           ngResizable 
+           ngDraggable 
+           (endOffset)="onMoveEnd($event)"
+           (rzStop)="onResizeStop($event)"
+           [(style.width.px)]="width"
+           [(style.height.px)]="height"
+           [(style.top.px)]="offsetTop"
+           [(style.left.px)]="offsetLeft"
+           [ngStyle]="ngStyles"
+           class="resizable-widget drag-block" 
+           (edge)="checkEdge($event)"
+           [bounds]="myBounds"
+           [inBounds]="inBounds"
+           rzContainment="#container" 
+           rzHandles="all">
+          <app-chart #chart></app-chart>
+      </div>
+    </div>
+  </div>
+</div>
