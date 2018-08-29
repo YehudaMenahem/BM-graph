@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col" style="min-height: 300px;">
+  <div class="col">
     <div id="container" class="widget-container drag-boundary" 
          [ngClass]="{ 'top-b': !edge?.top, 'bottom-b': !edge?.bottom, 'left-b': !edge?.left, 'right-b': !edge?.right }" #myBounds>
       <div #ngDraggable
@@ -14,7 +14,7 @@
            [ngStyle]="ngStyles"
            class="resizable-widget drag-block" 
            (edge)="checkEdge($event)"
-           [bounds]="myBounds"
+           [bounds]="myBounds"  
            [inBounds]="inBounds"
            rzContainment="#container" 
            rzHandles="all">

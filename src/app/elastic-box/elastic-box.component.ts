@@ -5,6 +5,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   templateUrl: './elastic-box.component.html',
   styleUrls: ['./elastic-box.component.css']
 })
+
 export class ElasticBoxComponent implements OnInit {
   @ViewChild('ngDraggable') ngDraggable: ElementRef;
   @ViewChild('chart', {read: ElementRef}) chart: ElementRef; 
@@ -23,12 +24,14 @@ export class ElasticBoxComponent implements OnInit {
     left: true,
     right: true
   };
-    
   public ngStyles = {
     "position":"absolute",
     "min-width":"450px",
     "min-height":"230px"
-  }
+  };
+
+  size = null;
+  position = null;
 
   constructor() {}
 
@@ -40,8 +43,6 @@ export class ElasticBoxComponent implements OnInit {
   }
 
   onMoveEnd(event) {
-    console.log(this.ngDraggable.nativeElement.getBoundingClientRect().top); 
-    console.log(this.ngDraggable.nativeElement.getBoundingClientRect().left); 
     localStorage.setItem(this.keyoffsetLeft, this.ngDraggable.nativeElement.getBoundingClientRect().left);
     localStorage.setItem(this.keyoffsetTop, this.ngDraggable.nativeElement.getBoundingClientRect().top);
   }

@@ -21,12 +21,28 @@ export class ChartComponent implements OnInit {
   public brlColor = "rgb(254,218,84)";
 
 
-  constructor(private _getData: GetDataService) { }
+  constructor(private _getData: GetDataService) {}
 
   ngOnInit() {
-
     this.getData();
+  }
 
+  getData() {
+    this._getData.getDataForChart().subscribe(
+      data => { 
+        this.weekData = data;
+        this.weekData.forEach(element => {
+          this.eurLine.push(element.rates.MYR);
+          this.ilsLine.push(element.rates.ILS);
+          this.brlLine.push(element.rates.BRL);
+        });
+        this.creatChart();
+      },
+      err => console.error(err)
+    );
+  }
+
+  creatChart(){
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
@@ -76,21 +92,6 @@ export class ChartComponent implements OnInit {
           }
       }
     });
-
-  }
-
-  getData() {
-    this._getData.getDataForChart().subscribe(
-      data => { 
-        this.weekData = data;
-        this.weekData.forEach(element => {
-          this.eurLine.push(element.rates.MYR);
-          this.ilsLine.push(element.rates.ILS);
-          this.brlLine.push(element.rates.BRL);
-        });
-      },
-      err => console.error(err)
-    );
   }
 
 }
